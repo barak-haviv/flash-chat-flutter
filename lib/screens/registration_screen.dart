@@ -1,5 +1,11 @@
+import 'package:flash_chat/components/email_textbox.dart';
+import 'package:flash_chat/components/password_textbox.dart';
+import 'package:flash_chat/constants.dart';
 import 'package:flutter/material.dart';
 import '../components/rounded_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'chat_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static String id = 'registration_screen';
@@ -9,6 +15,8 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  String email, password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,62 +37,47 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             SizedBox(
               height: 48.0,
             ),
-            TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
-              decoration: InputDecoration(
-                hintText: 'Enter your email',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-              ),
-            ),
+            EmailTextBox(onChange: (value) {
+              email = value;
+            }),
             SizedBox(
               height: 8.0,
             ),
-            TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
-              decoration: InputDecoration(
-                hintText: 'Enter your password',
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                ),
-              ),
-            ),
+            PasswordTextBox(onChange: (value) {
+              password = value;
+            }),
             SizedBox(
               height: 24.0,
             ),
             RoundedButton(
               color: Colors.blueAccent,
               text: 'Register',
-              onPressed: () {},
+              onPressed: () async {
+                print(email);
+                print(password);
+                registerNewUser(email, password);
+              },
             ),
           ],
         ),
       ),
     );
+  }
+
+  void registerNewUser(String email, String password) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+      Navigator.pushNamed(context, ChatScreen.id);
+      print('$userCredential logged in');
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }
