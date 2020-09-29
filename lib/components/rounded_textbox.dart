@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
 
+mixin RoundedTextBoxEditing {
+  final textEditingController = TextEditingController();
+  String get text {
+    return textEditingController.text;
+  }
+}
+
 class RoundedTextBox extends StatelessWidget {
-  RoundedTextBox(
-      {this.initialValue,
-      this.hintText,
-      this.controller,
-      this.onChange,
-      this.obscureText = false,
-      this.keyboardType,
-      this.decoration});
+  RoundedTextBox({
+    this.initialValue,
+    this.hintText,
+    this.controller,
+    this.onChange,
+    this.obscureText = false,
+    this.keyboardType,
+  });
 
   final bool obscureText;
   final Function onChange;
   final String initialValue;
   final TextInputType keyboardType;
-  final InputDecoration decoration;
   final TextEditingController controller;
   final String hintText;
 
