@@ -1,20 +1,46 @@
+import 'package:flash_chat/components/rounded_textbox.dart';
 import 'package:flutter/material.dart';
-import 'package:flash_chat/constants.dart';
 
 class EmailTextBox extends StatelessWidget {
-  EmailTextBox({this.onChange});
-  final _textEditingController = TextEditingController();
-  final Function onChange;
+  EmailTextBox({this.onChange, this.initialValue = ''});
 
-  @override
+  final onChange;
+  final initialValue;
+  final textEditingController = TextEditingController();
+
+  String get text {
+    return textEditingController.text;
+  }
+
   Widget build(BuildContext context) {
-    _textEditingController.text = 'a@a.com';
-    return TextField(
-      controller: _textEditingController,
-      textAlign: TextAlign.center,
-      keyboardType: TextInputType.emailAddress,
-      onChanged: this.onChange,
-      decoration: kInputDecoration.copyWith(hintText: 'Enter your email'),
+    textEditingController.text = initialValue;
+
+    return RoundedTextBox(
+      onChange: this.onChange,
+      controller: textEditingController,
+      hintText: 'Enter your email',
     );
   }
 }
+
+// class EmailTextBox extends StatelessWidget {
+//   EmailTextBox({this.onChange, this.initValue});
+
+//   final emailController = TextEditingController();
+//   final String initValue;
+
+//   final Function onChange;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     emailController.text = this.initValue;
+
+//     return TextField(
+//       controller: emailController,
+//       textAlign: TextAlign.center,
+//       keyboardType: TextInputType.emailAddress,
+//       onChanged: this.onChange,
+//       decoration: kInputDecoration.copyWith(hintText: 'Enter your email'),
+//     );
+//   }
+// }

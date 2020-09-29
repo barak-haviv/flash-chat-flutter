@@ -1,6 +1,5 @@
 import 'package:flash_chat/components/email_textbox.dart';
 import 'package:flash_chat/components/password_textbox.dart';
-import 'package:flash_chat/constants.dart';
 import 'package:flutter/material.dart';
 import '../components/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,7 +14,8 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  String email, password;
+  final _emailTextBox = EmailTextBox(initialValue: 'testme2@gmail.com');
+  final _passwordTextBox = PasswordTextBox(initialValue: 'Some33Pass');
 
   @override
   Widget build(BuildContext context) {
@@ -37,25 +37,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             SizedBox(
               height: 48.0,
             ),
-            EmailTextBox(onChange: (value) {
-              email = value;
-            }),
+            _emailTextBox,
             SizedBox(
               height: 8.0,
             ),
-            PasswordTextBox(onChange: (value) {
-              password = value;
-            }),
+            _passwordTextBox,
             SizedBox(
               height: 24.0,
             ),
             RoundedButton(
               color: Colors.blueAccent,
               text: 'Register',
-              onPressed: () async {
-                print(email);
-                print(password);
-                registerNewUser(email, password);
+              onPressed: () {
+                print('email: ${_emailTextBox.text}');
+                print('password: ${_passwordTextBox.text}');
+                registerNewUser(_emailTextBox.text, _passwordTextBox.text);
               },
             ),
           ],
