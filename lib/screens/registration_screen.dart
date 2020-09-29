@@ -1,4 +1,5 @@
 import 'package:flash_chat/components/email_textbox.dart';
+import 'package:flash_chat/components/loading.dart';
 import 'package:flash_chat/components/password_textbox.dart';
 import 'package:flutter/material.dart';
 import '../components/rounded_button.dart';
@@ -16,45 +17,49 @@ class RegistrationScreen extends StatefulWidget {
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _emailTextBox = EmailTextBox(initialValue: 'testme2@gmail.com');
   final _passwordTextBox = PasswordTextBox(initialValue: 'Some33Pass');
+  bool _inAsyncCall = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Hero(
-              tag: 'logo',
-              child: Container(
-                height: 200.0,
-                child: Image.asset('images/logo.png'),
+      body: LodingSpinner(
+        inAsyncCall: _inAsyncCall,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Hero(
+                tag: 'logo',
+                child: Container(
+                  height: 200.0,
+                  child: Image.asset('images/logo.png'),
+                ),
               ),
-            ),
-            SizedBox(
-              height: 48.0,
-            ),
-            _emailTextBox,
-            SizedBox(
-              height: 8.0,
-            ),
-            _passwordTextBox,
-            SizedBox(
-              height: 24.0,
-            ),
-            RoundedButton(
-              color: Colors.blueAccent,
-              text: 'Register',
-              onPressed: () {
-                print('email: ${_emailTextBox.text}');
-                print('password: ${_passwordTextBox.text}');
-                registerNewUser(_emailTextBox.text, _passwordTextBox.text);
-              },
-            ),
-          ],
+              SizedBox(
+                height: 48.0,
+              ),
+              _emailTextBox,
+              SizedBox(
+                height: 8.0,
+              ),
+              _passwordTextBox,
+              SizedBox(
+                height: 24.0,
+              ),
+              RoundedButton(
+                color: Colors.blueAccent,
+                text: 'Register',
+                onPressed: () {
+                  print('email: ${_emailTextBox.text}');
+                  print('password: ${_passwordTextBox.text}');
+                  registerNewUser(_emailTextBox.text, _passwordTextBox.text);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -62,6 +67,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   void registerNewUser(String email, String password) async {
     try {
+      setState(() => _inAsyncCall = true);
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
       Navigator.pushNamed(context, ChatScreen.id);
@@ -75,5 +81,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     } catch (e) {
       print(e.toString());
     }
+    setState(() => _inAsyncCall = false);
   }
 }
