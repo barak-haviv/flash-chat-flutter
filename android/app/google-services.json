@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "892610193192",
-    "firebase_url": "https://bk-flash-chat.firebaseio.com",
-    "project_id": "bk-flash-chat",
-    "storage_bucket": "bk-flash-chat.appspot.com"
+    "project_number": "75065684883",
+    "firebase_url": "https://flashchat-4791b.firebaseio.com",
+    "project_id": "flashchat-4791b",
+    "storage_bucket": "flashchat-4791b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:892610193192:android:c152710a7e452bdad2121d",
+        "mobilesdk_app_id": "1:75065684883:android:3c7c0c34dba06368f96e66",
         "android_client_info": {
           "package_name": "com.bkss.flash_chat"
         }
       },
       "oauth_client": [
         {
-          "client_id": "892610193192-u54aaabvegg8fhn1lqa8mthgqiv3d0pl.apps.googleusercontent.com",
+          "client_id": "75065684883-mh6bt9m8lq05oag7rj7suh1uam7etlsi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDQCfm16sJZ1BFCeddeFF2nm0_9wMjOChM"
+          "current_key": "AIzaSyBxv34OkIAgovqD4sN10HpbeZtI90yzXGo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "892610193192-u54aaabvegg8fhn1lqa8mthgqiv3d0pl.apps.googleusercontent.com",
+              "client_id": "75065684883-mh6bt9m8lq05oag7rj7suh1uam7etlsi.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

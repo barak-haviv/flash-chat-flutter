@@ -1,12 +1,12 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/barakhaviv/dev/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/barakhaviv/bk/projects/sandbox/flutter/courses/the-complete-flutter-development-with-dart/flash-chat/flash-chat-flutter"
-export "FLUTTER_TARGET=lib/main.dart"
+export "FLUTTER_ROOT=D:\FreeLancing\flutter\flutter"
+export "FLUTTER_APPLICATION_PATH=D:\FreeLancing\flutter\flutter-projects\flash-chat-flutter"
+export "FLUTTER_TARGET=lib\main.dart"
 export "FLUTTER_BUILD_DIR=build"
-export "SYMROOT=${SOURCE_ROOT}/../build/ios"
+export "SYMROOT=${SOURCE_ROOT}/../build\ios"
 export "OTHER_LDFLAGS=$(inherited) -framework Flutter"
-export "FLUTTER_FRAMEWORK_DIR=/Users/barakhaviv/dev/flutter/bin/cache/artifacts/engine/ios"
+export "FLUTTER_FRAMEWORK_DIR=D:\FreeLancing\flutter\flutter\bin\cache\artifacts\engine\ios"
 export "FLUTTER_BUILD_NAME=1.0.0"
 export "FLUTTER_BUILD_NUMBER=1"
 export "DART_OBFUSCATION=false"

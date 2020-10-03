@@ -27,6 +27,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   }
 
   void animate() {
+    // ignore: unused_local_variable
     AnimationStatus _animationStatus;
     _animationController = AnimationController(
       vsync: this,
@@ -35,7 +36,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
     _animationController.forward();
 
-    _colorAnimation = ColorTween(begin: Colors.red, end: Colors.blue)
+    _colorAnimation = ColorTween(begin: Colors.red, end: Colors.white)
         .animate(_animationController);
     _logoAnimation =
         CurvedAnimation(parent: _animationController, curve: Curves.decelerate);
@@ -46,8 +47,6 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
     _animationController.addListener(() {
       setState(() {});
-      print(_colorAnimation.value);
-      print(_logoAnimation.value);
     });
   }
 
